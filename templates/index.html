@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Leasing Market</title>
+{% load static %}
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta property="og:title" content="Get your phone and pay in 3 month installments" />
+<meta name="keywords" content="Get your phone and pay in 3 month installements, 2 years warranty, free delivery, free back cover & screen guard" />
+{% block title %}
+{% endblock %}
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--shortcut icon -->
+<link rel="shortcut icon" href='{% static 'images/logo.png'%}'>
+<!-- //for-mobile-apps -->
+<link href='{% static 'css/bootstrap.css'%}' rel='stylesheet' type='text/css' />
+<link href='{% static 'css/animate.css'%}' rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href='{% static 'css/style.css'%}' rel='stylesheet' type='text/css' />
+<!-- js -->
+   <script src='{% static 'js/jquery-1.11.1.min.js'%}'></script>
+<!-- //js -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src='{% static 'js/move-top.js'%}'></script>
+<script type="text/javascript" src='{% static 'js/easing.js'%}'></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+<link href='{% static 'css/font-awesome.css'%}' rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+<!--- start-rate---->
+<script src='{% static 'js/jstarbox.js'%}'></script>
+	<link rel="stylesheet" href='{% static 'css/jstarbox.css'%}' type="text/css" media="screen" charset="utf-8" />
+		<script type="text/javascript">
+			jQuery(function() {
+			jQuery('.starbox').each(function() {
+				var starbox = jQuery(this);
+					starbox.starbox({
+					average: starbox.attr('data-start-value'),
+					changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+					ghosting: starbox.hasClass('ghosting'),
+					autoUpdateAverage: starbox.hasClass('autoupdate'),
+					buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+					stars: starbox.attr('data-star-count') || 5
+					}).bind('starbox-value-changed', function(event, value) {
+					if(starbox.hasClass('random')) {
+					var val = Math.random();
+					starbox.next().text(' '+val);
+					return val;
+					}
+				})
+			});
+		});
+		</script>
+<!---//End-rate---->
+<script>
+$(document).ready(function(){
+  setInterval(function(){
+
+    var csrftoken = getCookie('csrftoken');
+    $.post('/cartvalue',{csrfmiddlewaretoken: csrftoken},function(data){
+      //console.log(data)
+      $("#cartNumber").text(data);
+    });
+  }, 500);
+});
+</script>
+
+</head>
+<body>
+<!--<a href="offer.html"><img src="images/download.png" class="img-head" alt=""></a>-->
+<div class="header">
+
+		<div class="container">
+			<!--<div class="logo">
+				<h1 ><a href="/">
+             <img class="logo-pic" src='{% static 'images/logo.png'%}'>
+            </a>
+        </h1>
+			</div>-->
+      <!--
+			<div class="head-t">
+				<ul class="card">
+					<li><a href="wishlist.html" ><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a></li>
+					<li><a href="login.html" ><i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+					<li><a href="register.html" ><i class="fa fa-arrow-right" aria-hidden="true"></i>Register</a></li>
+					<li><a href="about.html" ><i class="fa fa-file-text-o" aria-hidden="true"></i>Order History</a></li>
+					<li><a href="shipping.html" ><i class="fa fa-ship" aria-hidden="true"></i>Shipping</a></li>
+				</ul>
+			</div>-->
+
+			<!--<div class="header-ri">
+
+				<ul class="social-top">
+					<li><a href="#" class="icon facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span></span></a></li>
+					<li><a href="#" class="icon twitter"><i class="fa fa-twitter" aria-hidden="true"></i><span></span></a></li>
+					<li><a href="#" class="icon pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i><span></span></a></li>
+					<li><a href="#" class="icon dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i><span></span></a></li>
+				</ul>
+			</div>-->
+
+      <!-- DRAFT -->
+      {% block navbar %}
+      <div class="header-nightsky">
+        <nav class="navbar navbar-default">
+            <div class="container" style="padding-right:40px;">
+                <a class="navbar-brand" href="/">
+                     <img class="logo-pic" src='{% static 'images/logo.png'%}'>
+                    </a>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="myNavbar" aria-expanded="false" style="height: 0px;">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/">Home</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              {% for category in categories %}
+                                <li><a href="/category/{{category.id}}">{{category}}</a></li>
+                              {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="/how-to-buy">How To Order</a></li>
+                        <li><a href="/about"> About us</a></li>
+          							<li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+      {% endblock %}
+      <!-- End DRAFT -->
+
+     <!-- block navbar -->
+				<!--<div class="nav-top">
+					<nav class="navbar navbar-default">
+
+					<div class="navbar-header nav_2">
+						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+
+
+					</div>
+					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+						<ul class="nav navbar-nav ">
+							<li class=" active"><a href="/" class="hyper "><span>Home</span></a></li>
+
+							<li class="dropdown ">
+								<a href="#" class="dropdown-toggle  hyper" data-toggle="dropdown" ><span>Categories<b class="caret"></b></span></a>
+								<ul class="dropdown-menu multi">
+									<div class="row">
+										<div class="col-sm-3">
+											<ul class="multi-column-dropdown">
+                      {% for category in categories %}
+												<li><a href="/category/{{category.id}}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{category}}</a></li>
+                      {% endfor %}
+											</ul>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</ul>
+							</li>
+							<li><a href="/how-to-buy" class="hyper"> <span>How To Order</span></a></li>
+              <li><a href="/about" class="hyper"> <span>About us</span></a></li>
+							<li><a href="/contact" class="hyper"><span>Contact Us</span></a></li>
+						</ul>
+					</div>
+					</nav>
+					 <div class="cart" >
+          <a href="/checkout">
+						<span class="fa fa-shopping-cart my-cart-icon"><span id="cartNumber" class="badge badge-notify my-cart-badge"></span></span>
+          </a>
+          </div>
+					<div class="clearfix"></div>
+				</div>-->
+        <!-- endblock -->
+
+				</div>
+</div>
+{% block main %}
+      <div class="" id="home" style="background:#F2F3F3;">
+        <div class="row">
+          <div class="slide-left">
+            <div class="slide-text" style="display:grid;background: none;">
+            <p class="upper-left-text" style="margin-bottom:10px;"><i class="fa fa-arrow-right" aria-hidden="true"></i>Birashoboka ko wabona telephone wifuza ukishyura mu mezi atatu (3 months installments)</p>
+            <p class="upper-left-text" style="margin-bottom:10px;"><i class="fa fa-arrow-right" aria-hidden="true"></i>1 year warranty </p>
+          </div>
+          </div>
+          <div class="slide-right">
+            <div class="slide-img">
+            <img src='{% static 'images/s8.png'%}' id="slide-img-pic" alt="collabo background" class="img-aresponsive sliding-pics">
+          </div>
+        </div>
+        </div>
+        <!--<p class="capt-y">Get your phone and pay in 3 months installements<br>
+                          2 years warranty against any purchased item<br>
+                          Free back cover & Screen guard<br>
+                          Free Delivery
+        </p>-->
+       <!--<div id="myCarousel" class="carousel slide" data-ride="carousel">
+         <ol class="carousel-indicators">
+           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+           <li data-target="#myCarousel" data-slide-to="1"></li>
+           <li data-target="#myCarousel" data-slide-to="2"></li>
+         </ol>
+         <div class="carousel-inner" role="listbox">
+           <div class="item active">
+             <div class="slider-obj">
+               <div class="slide-pic">
+                   <img src='{% static 'images/galaxy j3.jpg'%}' id="pic_one" alt="collabo background" class="img-aresponsive sliding-pics">
+              <div class="slide-text">
+                 <div class="carousel-caption capt">
+                  <div class="some">
+                    <p class="capt-p">Get your phone and pay in 3 months installements<br>
+                                      2 years warranty against any purchased item<br>
+                                      Free back cover & Screen guard<br>
+                                      Free Delivery
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="item">
+             <div class="slider-obj">
+               <div class="slide-pic">
+                   <img src='{% static 'images/galaxy j5.jpg'%}' id="pic_two" alt="collabo background" class="img-aresponsive sliding-pics">
+               </div>
+
+               </div>
+             </div>
+          <div class="item">
+             <div class="slider-obj">
+               <div class="slide-pic">
+                    <img src='{% static 'images/galaxy j2.jpg'%}' id="pic_three" alt="collabo background" class="img-aresponsive sliding-pics">
+               </div>
+
+             </div>
+           </div>
+         </div>
+       </div>-->
+       </div>
+     <!--</div>-->
+<!--content-->
+<div class="content-top ">
+	<div class="container ">
+		<div class="spec ">
+			<h3>SmartPhone Offers</h3>
+			<div class="ser-t">
+				<b></b>
+				<span><i></i></span>
+				<b class="line"></b>
+			</div>
+		</div>
+    <div class="search-form">
+      <form action="/search" method="get">
+        <input type="text" placeholder="Search..." name="search">
+        <input type="submit" value=" " >
+      </form>
+    </div>
+    <div class="search-message">
+        {% if length == 0 %}
+        <h3 class="text-center">No results for {{name}}<br> Please Search Again </h3>
+        {% else %}
+        <h3 class="text-center"> {{message}}</h3>
+        {% endif %}
+     </div>
+			<div class="tab-head ">
+				<div class="">
+					<div class="">
+						<div class=" con-w3l">
+              {% for product in products %}
+							<div class="col-md-3 m-wthree">
+								<div class="col-m">
+									<a href="/product/{{product.id}}" class="offer-img">
+										<img src={{product.title_image.url}} class="img-responsive" alt="">
+										<!--<div class="offer"></div>-->
+									</a>
+									<div class="mid-1">
+										<div class="women">
+											<h6><a href="/product/{{product.id}}"><b>{{product.product_name}}</b></a></h6>
+										</div>
+                      <p class="phone-price" style="display:block;"><span style="float:left;">Category</span><span style="float:right;">{{product.category}}</span></p>
+											<p class="phone-price" style="display:block;"><span style="float:left;">Price</span><span style="float:right;"> {{product.price}} Rwf</span></p>
+											<div class="clearfix"></div>
+										<div class="add">
+										   <a class="btn btn-danger my-cart-btn my-cart-b"  href="/product/{{product.id}}" data-value={{product.id}}>View More</a>
+										</div>
+
+									</div>
+								</div>
+							</div>
+              {% endfor %}
+               <div class="clearfix"></div>
+						 </div>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	</div>
+{% endblock %}
+<!-- Alert Modal -->
+<div class="modal fade" id="alertModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+        <h4 class="modal-title text-center">Leasing Market</h4>
+      </div>
+      <div class="modal-body">
+        <p class="alert-message"></p>
+      </div>
+      <div class="modal-footer">
+        <a href="/checkout" class="btn btn-1 btn-success btn-alert-ok">Order Now</a>
+        <button type="button" class="btn btn-1 btn-danger btn-alert-ok" data-dismiss="modal" >Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- End of alert modal -->
+<!--footer-->
+<div class="footer">
+	<div class="container">
+		<div class="clearfix"></div>
+			<div class="footer-bottom">
+				<h2 ><a href="index.html">Leasing Market<span>Easy Pay Easy Life</span></a></h2>
+				<ul class="social-fo">
+					<li><a href="#" class=" face"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#" class=" twi"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#" class=" pin"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+          <li><a href="#" class=" wha"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+				</ul>
+				<div class=" address">
+					<div class="col-md-4 fo-grid1">
+							<p><i class="fa fa-home" aria-hidden="true"></i>Kigali, Rwanda.</p>
+					</div>
+					<div class="col-md-4 fo-grid1">
+							<p><i class="fa fa-phone" aria-hidden="true"></i>+250 782 338 464 </p>
+					</div>
+					<div class="col-md-4 fo-grid1">
+						<p><a href="mailto:leasingmktrw@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i>leasingmktrw@gmail.com</a></p>
+					</div>
+					<div class="clearfix"></div>
+
+					</div>
+			</div>
+		<div class="copy-right">
+			<p> &copy; 2017 Leasing Market Ltd. All Rights Reserved | Design by  <a href="#">Campus250 Ltd</a></p>
+		</div>
+	</div>
+</div>
+<!-- //footer-->
+<!-- Custom -->
+<script src='{% static 'js/custom.js'%}'></script>
+<!-- End Custom -->
+<!-- smooth scrolling -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+		/*
+			var defaults = {
+			containerID: 'toTop', // fading element id
+			containerHoverID: 'toTopHover', // fading element hover id
+			scrollSpeed: 1200,
+			easingType: 'linear'
+			};
+		*/
+		$().UItoTop({ easingType: 'easeOutQuart' });
+		});
+	</script>
+	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!-- //smooth scrolling -->
+<!-- for bootstrap working -->
+		<script src='{% static 'js/bootstrap.js'%}'></script>
+<!-- //for bootstrap working -->
+<script type='text/javascript' src='{% static 'js/jquery.mycart.js'%}'></script>
+  <script type="text/javascript">
+/*
+  $(function () {
+
+    var goToCartIcon = function($addTocartBtn){
+      var $cartIcon = $(".my-cart-icon");
+      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+      $addTocartBtn.prepend($image);
+      var position = $cartIcon.position();
+      $image.animate({
+        top: position.top,
+        left: position.left
+      }, 500 , "linear", function() {
+        $image.remove();
+      });
+    }
+
+    $('.my-cart-btn').myCart({
+      classCartIcon: 'my-cart-icon',
+      classCartBadge: 'my-cart-badge',
+      affixCartIcon: true,
+      checkoutCart: function(products) {
+        $.each(products, function(){
+          console.log(this);
+        });
+      },
+      clickOnAddToCart: function($addTocart){
+        goToCartIcon($addTocart);
+      },
+      getDiscountPrice: function(products) {
+        var total = 0;
+        $.each(products, function(){
+          total += this.quantity * this.price;
+        });
+        return total * 1;
+      }
+    });
+
+  });*/
+  </script>
+</body>
+</html>

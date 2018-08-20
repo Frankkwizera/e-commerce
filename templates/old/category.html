@@ -1,0 +1,67 @@
+{% extends 'admin.html' %}
+{% block main %}
+<div class="admin">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-info all-category-panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">All Categories</h3>
+        </div>
+        <div class="panel-body">
+          <table >
+               <tr>
+                   <th>Name</th>
+                   <th>Edit</th>
+                   <th>Delete</th>
+               </tr>
+               {% for category in categories %}
+                   <tr>
+                       <td class="ring-in">{{category.category_name}} </td>
+                       <td class="checkout-subtotal">
+                         <a href="/editCategory/{{category.id}}" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                         </a>
+                       </td>
+                       <td class="ring-in">
+                         <a href="/deletecategory/{{category.id}}">
+                         <span class="glyphicon glyphicon-remove"></span>
+                       </a>
+                       </td>
+                   </tr>
+               {% endfor %}
+          </table>
+          <div class="clearfix"> </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+             <h3 class="panel-title">New Category</h3>
+        </div>
+        <div class="panel-body">
+          <!-- form -->
+          {% if instance_id %}
+            <form action="/editCategory" method="post">
+          {% else %}
+            <form action="/addCategory" method="post">
+          {% endif %}
+            {% csrf_token%}
+            {% load bootstrap %}
+            {{categoryform|bootstrap}}
+            {% if instance_id %}
+            <input type="text" value="{{instance_id}}" name="category_id" hidden>
+            <input type="submit" class="order-submit form-control" value="Edit ">
+            {% else %}
+            <input type="submit" class="order-submit form-control" value="Add">
+            {% endif %}
+          </form>
+          <!-- end form -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

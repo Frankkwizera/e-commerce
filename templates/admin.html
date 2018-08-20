@@ -1,0 +1,135 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block cart %}
+{% endblock %}
+{% block navbar %}
+<!--
+ <ul class="memenu skyblue">
+     <li class=" grid"><a  href="/">Products</a></li>
+     <li><a  href="/how-to-buy">Category</a></li>
+     <li><a class="color6" href="/contact">Seller</a></li>
+     <li><a class="color6" href="/contact">Products Requests</a></li>
+ </ul>-->
+ <!--
+ <div style="display:flex;margin-bottom:10px;">
+ <a href="#" class="btn btn-lg btn-info user"><span class="glyphicon glyphicon-user">{{user}}</span></a>
+ <ul class="nav nav-pills memenu skyblue admin-navbar" role="tablist">
+        <li role="presentation"><a href="/adminProducts">Products <span class="badge">{{length}}</span></a></li>
+        <li role="presentation"><a href="/adminCategory">Category <span class="badge">{{catLength}}</span></a></li>
+        <li role="presentation"><a href="/sales">Sale Requests<span class="badge">{{salelength}}</span></a></li>
+        <li role="presentation"><a href="/">Home</a></li>
+        <li role="presentation"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+</ul>
+</div>-->
+
+<div class="nav-top">
+  <nav class="navbar navbar-default" style="margin-bottom:10px;">
+
+  <div class="navbar-header nav_2">
+    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+
+  </div>
+  <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav ">
+      <a href="#" class="btn btn-lg btn-info user"><span class="glyphicon glyphicon-user">{{user}}</span></a>
+      <li role="presentation"><a href="/adminProducts">Products <span class="badge">{{length}}</span></a></li>
+      <li role="presentation"><a href="/adminCategory">Category <span class="badge">{{catLength}}</span></a></li>
+      <li role="presentation"><a href="/sales">Sale Requests<span class="badge">{{salelength}}</span></a></li>
+      <li role="presentation"><a href="/">Home</a></li>
+      <li role="presentation"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+    </ul>
+  </div>
+  </nav>
+  <div class="clearfix"></div>
+</div>
+ {% endblock %}
+{% block main %}
+<div class="admin">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-info all-products-panel order-panel" style="padding-bottom:10px;">
+        <div class="panel-heading order-panel-heading">
+          <h3 class="panel-title">All products</h3>
+        </div>
+        <div class="panel-body">
+          <table >
+               <tr>
+                   <th>Smart Phone</th>
+                   <th>Prices</th>
+                   <!--<th>Delery Detials</th>-->
+                   <th>Edit</th>
+                   <th>Delete</th>
+               </tr>
+               {% for product in products %}
+                   <tr>
+                       <td class="ring-in">
+                           <a class="at-in">
+                              <img src={{product.title_image.url}} class="img-responsive" alt="">
+                           </a>
+                           <div class="sed">
+                             <h5>{{product.product_name}}</h5>
+                           </div>
+                           <div class="clearfix"> </div>
+                       </td>
+                       <td class="checkout-price">{{product.price}} Rwf</td>
+                       <!--<td>FREE SHIPPING</td>-->
+                       <td class="checkout-subtotal">
+                         <a href="/editProduct/{{product.id}}" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                         </a>
+                       </td>
+                       <td class="checkout-subtotal">
+                         <a href="/deleteproduct/{{product.id}}">
+                         <span class="glyphicon glyphicon-remove"></span>
+                       </a>
+                       </td>
+                   </tr>
+               {% endfor %}
+          </table>
+          <div class="clearfix"> </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-info order-panel" style="padding-bottom:10px;">
+        <div class="panel-heading order-panel-heading">
+          {% if name %}
+             <h3 class="panel-title">Editing {{name}}</h3>
+          {% else %}
+             <h3 class="panel-title">Add a new Product</h3>
+          {% endif %}
+        </div>
+        <div class="panel-body">
+          <!-- form -->
+          {% if instance_id %}
+            <form action="/editProduct" method="post" enctype="multipart/form-data">
+          {% else %}
+            <form action="/addProduct" method="post" enctype="multipart/form-data">
+          {% endif %}
+              {% csrf_token%}
+              {% load bootstrap %}
+              {{productform|bootstrap}}
+                  {% if instance_id %}
+                  <input type="text" value="{{instance_id}}" name="product_id" hidden>
+                  <input type="submit" class="order-submit form-control" value="Edit ">
+                  {% else %}
+                  <input type="submit" class="order-submit form-control" value="Add">
+                  {% endif %}
+
+            </form>
+          <!-- end form -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+<a class="btn btn-lg btn-success" href="#"> Logout </a>

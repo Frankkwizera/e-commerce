@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block main %}
+<!---->
+<div class="container">
+	<div class="check-out">
+		<h1>Checkout</h1>
+    	    <table >
+						  <tr>
+									<th>Item</th>
+									<th>Qty</th>
+									<th>Prices</th>
+									<!--<th>Delery Detials</th>-->
+									<th>Subtotal</th>
+									<th class="checkout-remove">Remove</th>
+						  </tr>
+
+							{% for product in products %}
+								  <tr>
+											<td class="ring-in">
+												  <a href="single.html" class="at-in">
+														 <img src={{product.product.title_image.url}} class="img-responsive" alt="">
+													</a>
+													<div class="sed">
+														<h5>{{product.product.product_name}}</h5>
+														<p>{{product.product.category}}</p>
+													</div>
+													<div class="clearfix"> </div>
+										  </td>
+											<td class="check"><input class="checkout-quantity" type="text" value="{{product.quantity}}">
+												                 <span class="checkout-add glyphicon glyphicon-plus" data-id="{{product.product.id}}"></span>
+											</td>
+											<td class="checkout-price">{{product.product.price}} UGX</td>
+											<!--<td>FREE SHIPPING</td>-->
+											<td class="checkout-subtotal">{{product.subtotal }} UGX</td>
+											<td class="checkout-remove">
+                          <a href="/remove/{{product.product.id}}/{{product.quantity}}"><span class="glyphicon glyphicon-remove"></span></a>
+											</td>
+								  </tr>
+							{% endfor %}
+
+	</table>
+	<h3 class="checkout-total">TOTAL: USh {{total}}</h3>
+	<a href="/order" class=" to-buy">PROCEED TO ORDER</a>
+	<a href="/" class=" to-buy">CONTINUE SHOPPING</a>
+	<a href="/empty" class="delete-cart">DELETE CART</a>
+	<div class="clearfix"> </div>
+    </div>
+</div>
+{% endblock %}

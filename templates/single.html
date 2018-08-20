@@ -1,0 +1,172 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    <meta property="og:title" content="{{product.product_name}} at {{product.price}} Rwf" />
+    <!--<meta property="og:description" content="{{article.body}}" />-->
+    <meta property="og:image" content="{{product.title_image.url}}" />
+{% endblock %}
+{% block main %}
+<div class="container">
+  <div class="search-form single-page-search">
+    <form action="/search" method="get">
+      <input type="text" placeholder="Search..." name="search">
+      <input type="submit" value=" " >
+    </form>
+  </div>
+  <div style="padding:10px;">
+  <div class="row phone-details">
+    <div class="col-md-8">
+        <!-- product details-->
+                <div class="col-md-6">
+                  <div class="col-m">
+                      <div class="item">
+                        <img src={{product.title_image.url}} class="img-responsive phone-pic" alt="">
+                      </div>
+                   </div>
+                   <h3 style="margin-bottom:7px;margin-top:17px;text-transform: capitalize;text-align:center;"><b>{{product.product_name}}</b></h3>
+                   <div class="first-details">
+                     <p><span class="glyphicon glyphicon-th-large"></span>{{product.category}}</p>
+                     <p><span class="glyphicon glyphicon-time"></span> {{product.time}}</p>
+                     <p class="quantity-val"><span>Quantity </span><input type="number" value="1" class="form-control phone-quantity quantity-value" style="width:30%;"></p>
+                   </div>
+                   <div class="price_single">
+                     <span class="reducedfrom phone-price">{{product.price}} Rwf</span>
+                     <div class="add-to" style="margin-top:12px;">
+                         <button class="btn btn-danger my-cart-btn my-cart-btn1 item_add_single" data-value={{product.id}}>Add to Cart</button>
+                          <button id="orderNow" class="btn btn-danger my-cart-btn my-cart-btn1" data-value={{product.id}}>Order Now</button>
+                       </div>
+                       <div>
+                       <h3 class="related-phones-title" style="width: 55%;margin-bottom: 10px;"><b>Share</b></h3>
+                       <ul class="social-fo">
+               					<li><a href="https://www.facebook.com/dialog/feed?app_id=1128072777285328&display=popup&link=http://www.leasingmarket.rw/product/{{product.id}}&redirect_uri=http://www.leasingmarket.rw&picture=http://www.leasingmarket.rw/{{product.title_image.url}}" class=" face"><i class="share fa fa-facebook" aria-hidden="true"></i></a></li>
+               					<!--<li><a href="#" class=" twi"><i class="share fa fa-twitter" aria-hidden="true"></i></a></li>-->
+                         <li><a href="whatsapp://send?text=Check {{product.product_name}} - http://www.leasingmarket.rw/product/{{product.id}}" data-action="share/whatsapp/share" class=" wha"><i class="share fa fa-whatsapp" aria-hidden="true"></i></a></li>
+               				</ul>
+                     </div>
+                    <div class="clearfix"></div>
+                   </div>
+                   <div class="col-md-12">
+                     <h3 class="related-phones-title">Return Policy</h3>
+                     <p style="margin-top:10px;line-height:22px;color: #777;">
+                       In case of a software defect, the phone is taken back
+                        to the supplier for a repair during the warranty period.</p>
+                   </div>
+                </div>
+                <div class="col-md-6">
+                  <!--<h4 class="quick">Phone Overview:</h4>-->
+                  <div class="bs-docs-example">
+                    <table class="table phone-specs">
+                      <thead>
+                        <tr>
+                          <th colspan="4" style="text-align:center;">{{product.product_name}} Specifications</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Network</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.network}}</td>
+                        </tr>
+                        <tr>
+                          <td>Launch</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.launch}}</td>
+                        </tr>
+                        <tr>
+                          <td>Display</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.display}}</td>
+                        </tr>
+                        <tr>
+                          <td>Operating System</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.os}}</td>
+                        </tr>
+                        <tr>
+                          <td>Storage</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.storage}}</td>
+                        </tr>
+                        <tr>
+                          <td>Ram</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.ram}}</td>
+                        </tr>
+                        <tr>
+                          <td>Front Camera</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.front_camera}}</td>
+                        </tr>
+                        <tr>
+                          <td>Back Camera</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.back_camera}}</td>
+                        </tr>
+                        <tr>
+                          <td>Battery</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.battery}}</td>
+                        </tr>
+                        <tr>
+                          <td>Features</td>
+                          <td colspan="3" style="text-align:-webkit-right;">{{product.features}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="clearfix"> </div>
+                <div class="row second-row">
+                  <h3 class="related-phones-title">Check Other {{product.category}}</h3>
+                  <div class="related-smart-phones">
+                    <div class=" con-w3l">
+                    {% for product in relatedProducts %}
+                    <div class="col-md-3 m-wthree">
+                      <div class="col-m">
+                        <a href="/product/{{product.id}}" class="offer-img">
+                          <img src={{product.title_image.url}} class="img-responsive" alt="">
+
+                        </a>
+                        <div class="mid-1">
+      										<div class="women">
+      											<h6><a href="/product/{{product.id}}"><b>{{product.product_name}}</b></a></h6>
+      										</div>
+                            <p class="phone-price" style="display:block;"><span style="float:left;">Category</span><span style="float:right;">{{product.category}}</span></p>
+      											<p class="phone-price" style="display:block;"><span style="float:left;">Price</span><span style="float:right;"> {{product.price}} Rwf</span></p>
+      											<div class="clearfix"></div>
+      										<div class="add">
+      										   <a class="btn btn-danger my-cart-btn my-cart-b"  href="/product/{{product.id}}" data-value={{product.id}}>View More</a>
+      										</div>
+      									</div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  </div>
+                </div>
+      </div>
+    <div class="col-md-4">
+      <div style="width:80%;margin:auto;">
+      <h3 class="related-phones-title"><b>Categories</b></h3>
+      <div class=" categories">
+        <ul class="cate-list">
+           {% for category in categories %}
+              <li><a class="cate-link" href="/category/{{category.id}}">{{category}}</a></li>
+           {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="product-bottom">
+        <h3 class="related-phones-title"><b>Check other Phones</b></h3>
+      {% for product in unrelatedProducts%}
+        <div class="product-go">
+          <div class=" fashion-grid">
+            <div class="col-m">
+            <a href="/product/{{product.id}}"><img class="img-responsive unrelated-product-image" src={{product.title_image.url}} alt=""></a>
+          </div>
+          </div>
+          <div class=" fashion-grid1">
+            <h6 class="best2"><a href="/product/{{product.id}}" >{{product.product_name}} </a></h6>
+            <h6 class="best2"><a href="/product/{{product.id}}" >{{product.category}} </a></h6>
+            <span class=" price-in1">{{product.price}} Rwf</span>
+          </div>
+          <div class="clearfix"> </div>
+        </div>
+      {% endfor %}
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

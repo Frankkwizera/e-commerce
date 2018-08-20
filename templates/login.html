@@ -1,0 +1,103 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block cart %}
+{% endblock %}
+{% block main %}
+<div class="contact" style="padding:10px;">
+			<div class="container">
+				<div class="spec ">
+					<h3>Login / Sign up</h3>
+						<div class="ser-t">
+							<b></b>
+							<span><i></i></span>
+							<b class="line"></b>
+						</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-info order-panel">
+							 <div class="panel-heading order-panel-heading">
+							    <h2 class="panel-title">Login</h2>
+						   </div>
+							 <div class="panel-body">
+								  <div class="">
+			              <form method="post" action="/login/">
+			                {% csrf_token %}
+											    <!--<input type="hidden" name="next" value="{{ request.GET.next }}" />-->
+			                    <div class="form-fields">
+			                      <span>username</span>
+			                      <input name="username" class="form-control" type="text" required>
+			                    </div>
+			                    <div class="form-fields">
+			                      <span>password</span>
+			                      <input name="password" class="form-control" type="Password" required>
+			                    </div>
+			                    <div class="form-fields">
+			                      <input class="btn btn-1 btn-success" type="submit" value="Login">
+			                    </div>
+			                    <p class="error form-fields" style="color:red;">{{message}}</p>
+			              </form>
+			            </div>
+						   </div>
+						 </div>
+			     </div>
+<!--
+					 <div class="col-md-6">
+ 						<div class="panel panel-info order-panel">
+ 							 <div class="panel-heading order-panel-heading">
+ 							    <h2 class="panel-title">Sign Up</h2>
+									<p class="error form-fields" style="color:red;text-align:center;">{{ErrorMessage}}</p>
+ 						   </div>
+ 							 <div class="panel-body">
+ 								  <div class="">
+ 			              <form method="post" action="/signup">
+ 			                {% csrf_token %}
+											    <div class="form-fields">
+												   <span>First Name</span>
+												   <input name="firstname" class="form-control" type="text" required>
+											    </div>
+													<div class="form-fields">
+ 			                      <span>Second Name</span>
+ 			                      <input name="secondname" class="form-control" type="text" required>
+ 			                    </div>
+ 			                    <div class="form-fields">
+ 			                      <span>Username</span>
+ 			                      <input name="username" class="form-control" type="text" required>
+ 			                    </div>
+													<div class="form-fields">
+ 			                      <span>Email</span>
+ 			                      <input name="email" class="form-control" type="email" required>
+ 			                    </div>
+													<div class="form-fields">
+ 			                      <span>Phone number</span>
+ 			                      <input name="phonenumber" class="form-control" type="number" required>
+ 			                    </div>
+ 			                    <div class="form-fields">
+ 			                      <span>Password</span>
+ 			                      <input name="password" id="password" class="form-control" type="Password" required>
+ 			                    </div>
+													<div class="form-fields">
+ 			                      <span>Re enter Password</span>
+ 			                      <input name="Repassword" id="Repassword" class="form-control" type="Password" required>
+ 			                    </div>
+ 			                    <div class="form-fields">
+ 			                      <input class="btn btn-1 btn-success" type="submit" value="Sign Up">
+ 			                    </div>
+ 			                    <p class="error form-fields" style="color:red;">{{message}}</p>
+ 			              </form>
+ 			            </div>
+ 						   </div>
+ 						 </div>
+ 			     </div>-->
+		   </div>
+    </div>
+</div>
+{% endblock %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Panel title</h3>
+	</div>
+	<div class="panel-body">
+		Panel content
+	</div>
+</div>

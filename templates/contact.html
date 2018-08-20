@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block main %}
+<!-- contact -->
+<div class="contact">
+	<div class="container">
+		<div class="spec ">
+			<h3>Contact</h3>
+				<div class="ser-t">
+					<b></b>
+					<span><i></i></span>
+					<b class="line"></b>
+				</div>
+		</div>
+		<div class=" contact-w3" style="padding:0;">
+			<div class="col-md-3 contact-right">
+			</div>
+			<div class="col-md-6 contact-left">
+				<p class="text-center" style="margin-bottom:15px;">  Let us know what you think </p>
+				<div id="container">
+					<!--Horizontal Tab-->
+					<div id="parentHorizontalTab">
+						<div class="resp-tabs-container hor_1">
+							<div>
+								<form action="/contactfeedback" method="post">
+									{% csrf_token%}
+									<input type="text" value="Name" name="name" required>
+									<input type="email" value="Email" name="email" required>
+									<textarea name="message" required></textarea>
+									<input type="submit" value="Submit" >
+								</form>
+							</div>
+							<div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 contact-right">
+			</div>
+
+		<div class="clearfix"></div>
+	</div>
+	</div>
+</div>
+<!-- //contact -->
+{% endblock %}

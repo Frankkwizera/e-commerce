@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+{% block main %}
+<div class="container">
+  <div class="order" style="padding:10px;">
+    <div class="spec ">
+      <h3>Order Details</h3>
+        <div class="ser-t">
+          <b></b>
+          <span><i></i></span>
+          <b class="line"></b>
+        </div>
+    </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-info order-panel" style="padding-bottom:10px;">
+            <div class="panel-heading order-panel-heading">
+              <h3 class="panel-title related-phones-title">Cart details</h3>
+            </div>
+            <div class="panel-body">
+              <table style="margin-bottom:10px;margin-top:10px;">
+                   <tr>
+                       <th>Smart Phone</th>
+                       <th>Qty</th>
+                      <!-- <th>Prices</th>-->
+                       <!--<th>Delery Detials</th>-->
+                       <th>Subtotal</th>
+                   </tr>
+                   {% for product in products %}
+                       <tr>
+                           <td class="ring-in">
+                               <a href="single.html" class="at-in">
+                                  <img src={{product.product.title_image.url}} class="img-responsive order-pic" alt="">
+                               </a>
+                               <div class="sed">
+                                 <h5>{{product.product.product_name}}</h5>
+                               </div>
+                               <div class="clearfix"> </div>
+                           </td>
+                           <td class="check order-qty">{{product.quantity}}</td>
+                           <!--<td class="checkout-price" style="text-align:center;">{{product.product.price}} Rwf</td>-->
+                           <!--<td>FREE SHIPPING</td>-->
+                           <td class="checkout-subtotal" style="text-align:center;">{{product.subtotal}} Rwf</td>
+                       </tr>
+                   {% endfor %}
+              </table>
+              <h3 class="checkout-total"><b>TOTAL: {{total}} Rwf</b></h3>
+            	<a href="/checkout" class=" proc-order">Back to Cart</a>
+            	<!--<a href="/" class=" cont-shopping">Continue Shopping</a>-->
+            	<div class="clearfix"> </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="order-option">
+
+              <p>There are 2 ways of ordering on LeasingMarkert.rw</p>
+              <dl>
+              <dt><span class="glyphicon glyphicon-asterisk" style="margin-right:5px;"></span>Call us on <i class="fa fa-phone" aria-hidden="true"></i> +250 782 338 464 <a href="tel:+250-782-338-464" class="btn btn-success">Call Now</a></dt>
+              <dd></dd>
+
+              <dt><span class="glyphicon glyphicon-asterisk" style="margin-right:5px;"></span> Fill the form and let us reach you <button id="fill-form" class="btn btn-success"><span class="glyphicon glyphicon-list-alt" style="margin-right:5px;"></span>Click to fill a form</button></dt>
+              <dd></dd>
+            </dl>
+          </div>
+        <div id="customerDetails" class="panel panel-info order-panel" hidden>
+            <div class="panel-heading order-panel-heading">
+              <h3 class="panel-title related-phones-title">Customer details</h3>
+            </div>
+            <div class="panel-body">
+                <form action="/saveclient" method="post" style="margin-bottom:10px;margin-top:10px;">
+                  {% csrf_token%}
+                  {% load bootstrap %}
+  								{{saleform|bootstrap}}
+                    <input type="submit" class="order-submit form-control btn btn-success" value="CLICK TO ORDER">
+  							</form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

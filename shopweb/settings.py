@@ -24,7 +24,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y9@hcklp16v$_5%1s5d9$1-w&vur%s@prl@0#ic7r2hy02h_l='
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -87,18 +87,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'urban_prod',
-        'USER': 'u_urban',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
-"""
+
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 #DATABASES = { 'default': dj_database_url.config() }
@@ -153,9 +142,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     162.144.101.4
 """
 
-AWS_ACCESS_KEY_ID = 'AKIAJHGPXR4NA7EZHJKQ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'herokushopapp'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = ''
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
